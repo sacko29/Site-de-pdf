@@ -1012,5 +1012,79 @@
             }
         });
     </script>
+.download-help h4 i {
+    margin-right: 10px;
+}
+
+.download-help ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.download-help li {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.download-help li i {
+    margin-right: 8px;
+    color: #2196f3;
+    width: 16px;
+}
+
+.download-help p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+@media (max-width: 480px) {
+    .download-help-container {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+</style>
+
+<script>
+    // Modifiez la fonction downloadPDF pour afficher l'aide
+    function downloadPDF() {
+        showNotification('Téléchargement du PDF optimisé par IA...', 'ai');
+        
+        // Afficher l'aide pour mobile après 2 secondes
+        setTimeout(() => {
+            // Vérifier si on est sur mobile
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                document.getElementById('downloadHelp').style.display = 'block';
+            }
+            showNotification('PDF téléchargé avec succès !', 'success');
+        }, 2000);
+    }
+    
+    // Ajoutez aussi ce bouton d'aide près de votre bouton de téléchargement
+    function addHelpButton() {
+        // Trouvez le conteneur de votre bouton de téléchargement
+        const downloadButtons = document.querySelectorAll('.btn-accent');
+        if (downloadButtons.length > 0) {
+            downloadButtons.forEach(btn => {
+                const helpBtn = document.createElement('button');
+                helpBtn.className = 'btn';
+                helpBtn.innerHTML = '<i class="fas fa-question-circle"></i> Aide téléchargement';
+                helpBtn.style.background = '#2196f3';
+                helpBtn.style.marginLeft = '10px';
+                helpBtn.onclick = function() {
+                    document.getElementById('downloadHelp').style.display = 'block';
+                };
+                btn.parentNode.appendChild(helpBtn);
+            });
+        }
+    }
+    
+    // Exécutez cette fonction une fois la page chargée
+    window.addEventListener('load', addHelpButton);
+</script>
 </body>
-  </html>
+</html>
